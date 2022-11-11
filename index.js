@@ -58,3 +58,12 @@ app.delete("/data", checkAuth, async (req, res) => {
 });
 
 app.listen(PORT, () => console.log("Server is listening on port " + PORT));
+
+mongoose.connection.on("open", (ref) =>
+  console.log("Connected to mongo server.")
+);
+mongoose.connection.on("error", (err) => {
+  console.log("Could not connect to mongo server!");
+  console.log(err);
+  return process.exit(1);
+});
